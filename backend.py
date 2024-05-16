@@ -16,7 +16,6 @@ class Backend:
         return tasks
 
     def add(self, **kwargs):
-        kwargs.update({'priority': 'low'})
         task = Task(**kwargs)
         with Session(self.engine, expire_on_commit=False) as session:
             session.add(task)
