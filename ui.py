@@ -38,9 +38,12 @@ class MainWindow(tk.Tk):
         self.task_create.delete(1.0, tk.END)
 
     def mark_as_done(self):
-        task_index = self.todo_list_widget.curselection()[0]
-        self.todo_list.delete(task_index)
-        self.update_todo_list()
+        try:
+            task_index = self.todo_list_widget.curselection()[0]
+            self.todo_list.delete(task_index)
+            self.update_todo_list()
+        except IndexError:
+            pass
 
     def update_todo_list(self):
         self.todo_list_widget.delete(0, tk.END)
