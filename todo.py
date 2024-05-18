@@ -1,13 +1,10 @@
 class TodoList:
-    def __init__(self, backend):
+    def __init__(self):
         super().__init__()
-        self.backend = backend
-        self.tasks = self.backend.getAll()
+        self.tasks = []
 
-    def add(self, **kwargs):
-        task = self.backend.add(**kwargs)
+    def add(self, task):
         self.tasks.append(task)
 
     def delete(self, index):
-        task = self.tasks.pop(index)
-        self.backend.delete(task)
+        del self.tasks[index]

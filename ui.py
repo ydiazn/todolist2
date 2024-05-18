@@ -2,9 +2,9 @@ import tkinter as tk
 
 
 class MainWindow(tk.Tk):
-    def __init__(self, todo_list):
+    def __init__(self):
         super().__init__()
-        self.todo_list = todo_list
+        self.todo_list = []
 
         self.title("To-Do App")
         self.geometry("300x400")
@@ -32,22 +32,22 @@ class MainWindow(tk.Tk):
         task_text = self.task_create.get(1.0,tk.END).strip()
 
         if len(task_text) > 0:
-            self.todo_list.add(description=task_text)
+            task = {'description': task_text}
+            self.todo_list.append(task)
             self.update_todo_list()
 
         self.task_create.delete(1.0, tk.END)
 
     def mark_as_done(self):
         try:
-            task_index = self.todo_list_widget.curselection()[0]
-            self.todo_list.delete(task_index)
+            index = self.todo_list_widget.curselection()[0]
+            del self.todo_list[index]
             self.update_todo_list()
         except IndexError:
             pass
 
     def update_todo_list(self):
         self.todo_list_widget.delete(0, tk.END)
-        self.todo_list.tasks
 
-        for task in self.todo_list.tasks:
-            self.todo_list_widget.insert(tk.END, task.description)
+        for task in self.todo_list:
+            self.todo_list_widget.insert(tk.END, task['description'])
